@@ -6,11 +6,12 @@ class GameMaster {
     sf::RenderWindow gameWindow;
 
     TerrainGenerator tg;
-    bool updateTerrain = true;
+    bool doUpdateTerrain = true;
 
     public:
         GameMaster(unsigned width, unsigned height);
         bool run();
         void quit();
         void handleEvent();
+        void updateTerrain();
 };

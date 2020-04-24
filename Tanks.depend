@@ -847,11 +847,14 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1587754891 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\gamemaster.cpp
+1587759658 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\gamemaster.cpp
 	"GameMaster.h"
+	"PhysicsObject.h"
 	<iostream>
+	<math.h>
+	<Windows.h>
 
-1587747900 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\gamemaster.h
+1587757502 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\gamemaster.h
 	<SFML/Graphics.hpp>
 	"TerrainGenerator.h"
 
@@ -1284,4 +1287,11 @@
 
 1587752831 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\terraingenerator.h
 	<vector>
+
+1587758845 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\physicsobject.cpp
+	"PhysicsObject.h"
+	<iostream>
+
+1587758611 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\physicsobject.h
+	<utility>
 

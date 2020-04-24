@@ -47,6 +47,10 @@
 		</Linker>
 		<Unit filename="GameMaster.cpp" />
 		<Unit filename="GameMaster.h" />
+		<Unit filename="PhysicsObject.cpp" />
+		<Unit filename="PhysicsObject.h" />
+		<Unit filename="TerrainGenerator.cpp" />
+		<Unit filename="TerrainGenerator.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
