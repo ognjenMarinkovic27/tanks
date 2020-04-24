@@ -1,10 +1,15 @@
 #include<SFML/Graphics.hpp>
+#include "TerrainGenerator.h"
 
 class GameMaster {
-    int width, height;
+    unsigned screenWidth, screenHeight;
     sf::RenderWindow gameWindow;
+
+    TerrainGenerator tg;
+    bool updateTerrain = true;
+
     public:
-        GameMaster(int width, int height);
+        GameMaster(unsigned width, unsigned height);
         bool run();
         void quit();
         void handleEvent();
