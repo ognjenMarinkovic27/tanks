@@ -1,5 +1,4 @@
 #include "GameMaster.h"
-#include "PhysicsObject.h"
 #include <iostream>
 #include <math.h>
 #include <Windows.h>
@@ -12,9 +11,10 @@ GameMaster::GameMaster(unsigned width, unsigned height) {
     tg.generateTerrain(width, height, rand()%(1000000-100000)+100000);
 }
 
-bool GameMaster::run() {
+void GameMaster::run() {
     gameWindow.create(sf::VideoMode(screenWidth, screenHeight), "Tanks", sf::Style::Close);
-    PhysicsObject object(100, 500);
+    Rigidbody object(100, 500);
+    pe.addRigidbody(&object);
 
     while(gameWindow.isOpen()) {
         sf::Event evnt;
@@ -34,12 +34,9 @@ bool GameMaster::run() {
 
         sf::CircleShape objectSprite(15.f);
         objectSprite.setFillColor(sf::Color::Red);
-        objectSprite.setPosition(sf::Vector2f(object.getX()-15, screenHeight-(1+(object.getY()))-15));
+        objectSprite.setPosition(sf::Vector2f(object.getPosition().first-15, screenHeight-(1+(object.getPosition().second))-15));
 
-        object.addVelocity(0, -0.2);
-        if(terrain[(int)round(object.getX())][(int)round(object.getY())-15] == 1) {object.setVelocity(0.0, 0.0);}
-
-        object.move();
+        pe.simulate(terrain);
 
         gameWindow.draw(objectSprite);
         gameWindow.display();

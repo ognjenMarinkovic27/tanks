@@ -3,8 +3,6 @@
 
 int main()
 {
-
-
     GameMaster gm(1280, 720);
     gm.run();
 }
