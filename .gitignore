@@ -20,5 +20,6 @@
 *.out
 *.app
 
+#Code::Blocks sranja
 *.layout
 *.depend
