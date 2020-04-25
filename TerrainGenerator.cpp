@@ -45,6 +45,7 @@ void TerrainGenerator::generateTerrain(unsigned width, unsigned height, long lon
 
     for(int i=0;i<width;i++) {
         k = minY+getNoise(i, maxY-minY);
+        heightMap.push_back(k);
         for(int j=0;j<height;j++) {
             if(j < k) terrain[i][j] = 1;
             else terrain[i][j] = 0;
@@ -61,4 +62,8 @@ bool** TerrainGenerator::getTerrain() {
 
 int TerrainGenerator::getTileSize () {
     return tileSize;
+}
+
+std::vector<int> TerrainGenerator::getHeightMap () {
+    return heightMap;
 }

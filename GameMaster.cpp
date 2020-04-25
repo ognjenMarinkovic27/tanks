@@ -12,7 +12,8 @@ GameMaster::GameMaster(unsigned width, unsigned height) {
 }
 
 void GameMaster::run() {
-    gameWindow.create(sf::VideoMode(screenWidth, screenHeight), "Tanks", sf::Style::Close);
+    gameWindow.create(sf::VideoMode(screenWidth, screenHeight), "Tanks", sf::Style::Close | sf::Style::Resize);
+
     Rigidbody object(100, 500);
     pe.addRigidbody(&object);
 
@@ -23,6 +24,8 @@ void GameMaster::run() {
             case sf::Event::Closed:
                 gameWindow.close();
                 break;
+            case sf::Event::Resized:
+                break;
             }
         }
 
@@ -30,15 +33,30 @@ void GameMaster::run() {
 
         updateTerrain();
         bool** terrain = tg.getTerrain();
+        std::vector<int> heightMap = tg.getHeightMap();
 
 
-        sf::CircleShape objectSprite(15.f);
+
+
+
+        sf::RectangleShape objectSprite(sf::Vector2f(30, 15));
+        objectSprite.setOrigin(15.0f, 7.5f);
         objectSprite.setFillColor(sf::Color::Red);
-        objectSprite.setPosition(sf::Vector2f(object.getPosition().first-15, screenHeight-(1+(object.getPosition().second))-15));
+        objectSprite.setPosition(sf::Vector2f(object.getPosition().x, screenHeight-(1+(object.getPosition().y))));
+        objectSprite.setRotation(object.getRotation()-90);
 
-        pe.simulate(terrain);
+        /*sf::RectangleShape line(sf::Vector2f(1280,4));
+        line.setPosition(sf::Vector2f(object.getPosition().x, screenHeight-(1+(object.getPosition().y))));
+        line.setRotation(object.getRotation()+90);
+        line.setFillColor(sf::Color::Magenta);*/
 
+        object.setVelocity(2*cos((object.getRotation()+90)*3.1415927/180), -2*sin((object.getRotation()+90)*3.1415927/180));
+
+
+        pe.simulate(terrain, tg.getHeightMap());
         gameWindow.draw(objectSprite);
+        //gameWindow.draw(line);
+
         gameWindow.display();
 
 

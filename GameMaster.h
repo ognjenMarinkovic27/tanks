@@ -1,6 +1,6 @@
 #include<SFML/Graphics.hpp>
-#include "TerrainGenerator.h"
 #include "PhysicsEngine.h"
+#include "TerrainGenerator.h"
 
 class GameMaster {
     unsigned screenWidth, screenHeight;
