@@ -13,26 +13,40 @@ void PhysicsEngine::addRigidbody(Rigidbody* rb) {
     rigidbodies.push_back(rb);
 }
 
-void PhysicsEngine::simulate (bool** t, std::vector<int> hm) {
+std::vector<Rigidbody*> PhysicsEngine::getRigidbodies() {
+    return rigidbodies;
+}
 
-    bool** terrain = t;
-    std::vector<int> heightMap = hm;
+void PhysicsEngine::simulate (bool** terrain, std::vector<int> heightMap, unsigned screenWidth, unsigned screenHeight) {
+    for(int i=0;i<screenWidth;i++)
+    {
+        for(int j=1;j<screenHeight;j++) {
+            if(terrain[i][j]==1 && terrain[i][j-1]==0) std::swap(terrain[i][j], terrain[i][j-1]);
+        }
+    }
+
 
     for(auto rb : rigidbodies) {
-        rb->addVelocity(0, -gravity);
+        if(rb->getGravity())
+            rb->addVelocity(0, -gravity);
         int X = (int)round(rb->getPosition().x);
         int Y = (int)round(rb->getPosition().y)-7.5;
+        if(terrain[X][Y-1] == 0) rb->enableGravity();
         if(Y<=heightMap[X]) {
+                rb->disableGravity();
                 if(Y<heightMap[X]) {
+                    if(heightMap[X]-Y < 25)
                     rb->setPosition(rb->getPosition().x, heightMap[X]);
+                    else
+                    rb->setVelocity(0,0);
                 }
-                rb->setVelocity(rb->getVelocity().x, 0.0);
                 float ang = atan((float)heightMap[X]-heightMap[X+1])*180/3.1415927-90;
-                std::cout << heightMap[X] << " " << heightMap[X+1] << " " << ang <<"\n";
+                //std::cout << heightMap[X] << " " << heightMap[X+1] << " " << ang <<"\n";
                 rb->setRotation(ang);
         }
-        rb->setPosition(rb->getPosition().x+rb->getVelocity().x, rb->getPosition().y+rb->getVelocity().y);
-
-
+        rb->setPosition(std::min(std::max(0.0f,rb->getPosition().x+rb->getVelocity().x),screenWidth*1.0f), std::min(std::max(0.0f,rb->getPosition().y+rb->getVelocity().y),screenHeight*1.0f));
     }
+
+
+
 }

@@ -45,3 +45,15 @@ void Rigidbody::setRotation(float ang) {
 float Rigidbody::getRotation(){
     return rotation;
 }
+
+void Rigidbody::disableGravity() {
+    useGravity = 0;
+}
+
+void Rigidbody::enableGravity() {
+    useGravity = 1;
+}
+
+bool Rigidbody::getGravity() {
+    return useGravity;
+}

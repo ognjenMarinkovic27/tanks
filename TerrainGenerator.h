@@ -17,4 +17,5 @@ class TerrainGenerator {
         bool** getTerrain();
         std::vector<int> getHeightMap();
         int getTileSize();
+        void destroyTerrain(int i, int k);
 };

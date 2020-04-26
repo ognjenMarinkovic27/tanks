@@ -1,5 +1,6 @@
 #include "TerrainGenerator.h"
 #include <math.h>
+#include <iostream>
 
 TerrainGenerator::TerrainGenerator() {
 }
@@ -52,8 +53,10 @@ void TerrainGenerator::generateTerrain(unsigned width, unsigned height, long lon
         }
     }
 
+}
 
-
+void TerrainGenerator::destroyTerrain(int i, int k) {
+    heightMap[i]-=k;
 }
 
 bool** TerrainGenerator::getTerrain() {

@@ -847,16 +847,17 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1587828200 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\gamemaster.cpp
+1587920044 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\gamemaster.cpp
 	"GameMaster.h"
 	<iostream>
 	<math.h>
 	<Windows.h>
 
-1587825139 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\gamemaster.h
+1587919280 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\gamemaster.h
 	<SFML/Graphics.hpp>
 	"PhysicsEngine.h"
 	"TerrainGenerator.h"
+	"Player.h"
 
 1581028159 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\sfml-2.5.1\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -1277,15 +1278,16 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1587808427 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\main.cpp
+1587900948 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\main.cpp
 	<SFML/Graphics.hpp>
 	"GameMaster.h"
 
-1587820576 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\terraingenerator.cpp
+1587907137 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\terraingenerator.cpp
 	"TerrainGenerator.h"
 	<math.h>
+	<iostream>
 
-1587825103 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\terraingenerator.h
+1587907158 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\terraingenerator.h
 	<vector>
 
 1587758845 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\physicsobject.cpp
@@ -1295,19 +1297,25 @@
 1587758611 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\physicsobject.h
 	<utility>
 
-1587819759 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\rigidbody.h
+1587892099 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\rigidbody.h
 	<SFML/Graphics.hpp>
 
-1587827850 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\physicsengine.cpp
+1587919172 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\physicsengine.cpp
 	"PhysicsEngine.h"
 	<iostream>
 	<math.h>
 
-1587827374 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\physicsengine.h
+1587918225 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\physicsengine.h
 	"Rigidbody.h"
 	<vector>
 
-1587819825 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\rigidbody.cpp
+1587892095 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\rigidbody.cpp
 	"Rigidbody.h"
 	<iostream>
+
+1587920076 c:\users\deki\documents\c++ ognjen\tankssfml\tanks\player.h
+	<SFML/Graphics.hpp>
+
+1587920080 source:c:\users\deki\documents\c++ ognjen\tankssfml\tanks\player.cpp
+	"Player.h"
 

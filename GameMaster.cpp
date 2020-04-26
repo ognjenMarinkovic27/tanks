@@ -10,12 +10,27 @@ GameMaster::GameMaster(unsigned width, unsigned height) {
     screenHeight = height;
     tg.generateTerrain(width, height, rand()%(1000000-100000)+100000);
 }
-
+/*bool oneclick = true;
+int k=0;*/
 void GameMaster::run() {
     gameWindow.create(sf::VideoMode(screenWidth, screenHeight), "Tanks", sf::Style::Close | sf::Style::Resize);
+    std::vector<int> heightMap = tg.getHeightMap();
 
-    Rigidbody object(100, 500);
-    pe.addRigidbody(&object);
+    sf::Font font;
+    font.loadFromFile("fonts/Poppins-Regular.ttf");
+
+    std::string names[playerCount] = {"Ognjen", "Pajdan", "Vasilije", "Cigan"};
+
+
+    for(int i=0;i<playerCount;i++)
+    {
+        Player p(names[i%(playerCount-1)], sf::Color(rand()%256, rand()%256, rand()%256));
+        players.push_back(p);
+        int X = screenWidth/(playerCount+1)*(i+1);
+        Rigidbody* rb = new Rigidbody(X, heightMap[X]);
+        pe.addRigidbody(rb);
+
+    }
 
     while(gameWindow.isOpen()) {
         sf::Event evnt;
@@ -29,41 +44,92 @@ void GameMaster::run() {
             }
         }
 
-        gameWindow.clear();
 
-        updateTerrain();
+
+
         bool** terrain = tg.getTerrain();
-        std::vector<int> heightMap = tg.getHeightMap();
+        heightMap = tg.getHeightMap();
 
 
 
 
 
-        sf::RectangleShape objectSprite(sf::Vector2f(30, 15));
+        /*sf::RectangleShape objectSprite(sf::Vector2f(30, 15));
         objectSprite.setOrigin(15.0f, 7.5f);
         objectSprite.setFillColor(sf::Color::Red);
         objectSprite.setPosition(sf::Vector2f(object.getPosition().x, screenHeight-(1+(object.getPosition().y))));
         objectSprite.setRotation(object.getRotation()-90);
 
-        /*sf::RectangleShape line(sf::Vector2f(1280,4));
+        sf::RectangleShape line(sf::Vector2f(1280,4));
         line.setPosition(sf::Vector2f(object.getPosition().x, screenHeight-(1+(object.getPosition().y))));
         line.setRotation(object.getRotation()+90);
         line.setFillColor(sf::Color::Magenta);*/
 
-        object.setVelocity(2*cos((object.getRotation()+90)*3.1415927/180), -2*sin((object.getRotation()+90)*3.1415927/180));
+
+        /*if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            sf::Vector2i mousePos = sf::Mouse::getPosition(gameWindow);
+            sf::RectangleShape cursor(sf::Vector2f(30, 30));
+            cursor.setOrigin(15.0f, 15.0f);
+            cursor.setFillColor(sf::Color::Cyan);
+            cursor.setPosition(sf::Vector2f(mousePos.x, mousePos.y));
+            gameWindow.draw(cursor);
+            if(oneclick) {
+                for(int i=mousePos.x-30;i<=mousePos.x+30;i++) {
+                    tg.destroyTerrain(i,60);
+                    for(int j=mousePos.y-30;j<=mousePos.y+30;j++) {
+
+                        terrain[i][(screenHeight-j-1)] = 0;
+                        oneclick = false;
+                    }
+
+                }
+                heightMap=tg.getHeightMap();
+                k=1;
+            }
+
+        }*/
+
+        pe.simulate(terrain, heightMap, screenWidth, screenHeight);
+
+        gameWindow.clear();
+        drawTerrain();
+        std::vector<Rigidbody*> rigidbodies = pe.getRigidbodies();
+        for(int i=0;i<playerCount;i++) {
+            float X = rigidbodies[i]->getPosition().x;
+            float Y = screenHeight-(1+rigidbodies[i]->getPosition().y);
+            sf::Text name(players[i].getName(), font, 12);
+            name.setColor(players[i].getColor());
+            name.setOutlineColor(sf::Color::Black);
+            name.setPosition(X-15,Y+20);
+            name.setOutlineThickness(1);
+            name.setLetterSpacing(2);
+            sf::RectangleShape objectSprite(sf::Vector2f(30, 15));
+            objectSprite.setOrigin(15.0f, 7.5f);
+            objectSprite.setFillColor(players[i].getColor());
+            objectSprite.setPosition(sf::Vector2f(X,Y));
+            objectSprite.setRotation(rigidbodies[i]->getRotation()-90);
+            gameWindow.draw(objectSprite);
+            gameWindow.draw(name);
+        }
 
 
-        pe.simulate(terrain, tg.getHeightMap());
-        gameWindow.draw(objectSprite);
-        //gameWindow.draw(line);
+
+        /*for(int i=0;i<heightMap.size();i++) {
+            sf::RectangleShape square(sf::Vector2f(5,5));
+            square.setFillColor(sf::Color::Black);
+            square.setOrigin(2.5,2.5);
+            square.setPosition(i, screenHeight-heightMap[i]-1);
+            gameWindow.draw(square);
+        }*/
+
+        /*gameWindow.draw(objectSprite);
+        gameWindow.draw(line);*/
 
         gameWindow.display();
-
-
     }
 }
 
-void GameMaster::updateTerrain() {
+void GameMaster::drawTerrain() {
     bool** terrain = tg.getTerrain();
     int tileSize = tg.getTileSize();
 
@@ -90,5 +156,4 @@ void GameMaster::updateTerrain() {
             }
         }
     }
-    doUpdateTerrain=false;
 }

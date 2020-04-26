@@ -4,10 +4,11 @@
 class PhysicsEngine {
     std::vector<Rigidbody*> rigidbodies;
 
-    float gravity = 2;
+    float gravity = 10;
     public:
         PhysicsEngine();
         PhysicsEngine(std::vector<Rigidbody*> rigidbodies);
+        std::vector<Rigidbody*> getRigidbodies();
         void addRigidbody(Rigidbody* rb);
-        void simulate(bool** t, std::vector<int> hm);
+        void simulate(bool** t, std::vector<int> hm, unsigned screenWidth, unsigned screenHeight);
 };

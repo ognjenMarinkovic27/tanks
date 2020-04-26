@@ -3,6 +3,7 @@
 class Rigidbody {
     sf::Vector2f position;
     sf::Vector2f velocity;
+    bool useGravity = true;
     float rotation;
     public:
         Rigidbody();
@@ -14,4 +15,7 @@ class Rigidbody {
         sf::Vector2f getPosition();
         sf::Vector2f getVelocity();
         float getRotation();
+        void disableGravity();
+        void enableGravity();
+        bool getGravity();
 };
