@@ -19,16 +19,17 @@ void GameMaster::run() {
     sf::Font font;
     font.loadFromFile("fonts/Poppins-Regular.ttf");
 
-    std::string names[playerCount] = {"Ognjen", "Pajdan", "Vasilije", "Cigan"};
+    std::string names[playerCount] = {"Ognjen", "Pajdan", "Vasilije", "Cigan", "Ognjen2"};
 
 
     for(int i=0;i<playerCount;i++)
     {
-        Player p(names[i%(playerCount-1)], sf::Color(rand()%256, rand()%256, rand()%256));
-        players.push_back(p);
         int X = screenWidth/(playerCount+1)*(i+1);
-        Rigidbody* rb = new Rigidbody(X, heightMap[X]);
-        pe.addRigidbody(rb);
+        Tank t(names[i%(playerCount)], sf::Color(rand()%256, rand()%256, rand()%256), new Rigidbody(X, heightMap[X]+400));
+        tanks.push_back(t);
+
+        //Rigidbody* rb = new Rigidbody(X, heightMap[X]+200);
+        pe.addRigidbody(tanks[i].getRigidbody());
 
     }
 
@@ -42,6 +43,14 @@ void GameMaster::run() {
             case sf::Event::Resized:
                 break;
             }
+            if(evnt.type == sf::Event::KeyReleased) {
+                if(evnt.key.code == sf::Keyboard::Space)
+                {
+                    tanks[currentPlayerIndex].travel(1);
+                    currentPlayerIndex=(currentPlayerIndex+1)%playerCount;
+                }
+
+            }
         }
 
 
@@ -49,9 +58,6 @@ void GameMaster::run() {
 
         bool** terrain = tg.getTerrain();
         heightMap = tg.getHeightMap();
-
-
-
 
 
         /*sf::RectangleShape objectSprite(sf::Vector2f(30, 15));
@@ -97,15 +103,15 @@ void GameMaster::run() {
         for(int i=0;i<playerCount;i++) {
             float X = rigidbodies[i]->getPosition().x;
             float Y = screenHeight-(1+rigidbodies[i]->getPosition().y);
-            sf::Text name(players[i].getName(), font, 12);
-            name.setColor(players[i].getColor());
+            sf::Text name(tanks[i].getName(), font, 12);
+            name.setColor(tanks[i].getColor());
             name.setOutlineColor(sf::Color::Black);
             name.setPosition(X-15,Y+20);
             name.setOutlineThickness(1);
             name.setLetterSpacing(2);
             sf::RectangleShape objectSprite(sf::Vector2f(30, 15));
             objectSprite.setOrigin(15.0f, 7.5f);
-            objectSprite.setFillColor(players[i].getColor());
+            objectSprite.setFillColor(tanks[i].getColor());
             objectSprite.setPosition(sf::Vector2f(X,Y));
             objectSprite.setRotation(rigidbodies[i]->getRotation()-90);
             gameWindow.draw(objectSprite);
@@ -125,6 +131,12 @@ void GameMaster::run() {
         /*gameWindow.draw(objectSprite);
         gameWindow.draw(line);*/
 
+
+        sf::Text currentPlayerText(tanks[currentPlayerIndex].getName()+"'s turn", font, 20);
+        currentPlayerText.setOrigin(currentPlayerText.getGlobalBounds().width/2,currentPlayerText.getGlobalBounds().height/2);
+        currentPlayerText.setPosition(screenWidth/2, 20);
+
+        gameWindow.draw(currentPlayerText);
         gameWindow.display();
     }
 }

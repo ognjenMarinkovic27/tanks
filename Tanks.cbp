@@ -51,6 +51,8 @@
 		<Unit filename="PhysicsEngine.h" />
 		<Unit filename="Rigidbody.cpp" />
 		<Unit filename="Rigidbody.h" />
+		<Unit filename="Tank.cpp" />
+		<Unit filename="Tank.h" />
 		<Unit filename="TerrainGenerator.cpp" />
 		<Unit filename="TerrainGenerator.h" />
 		<Unit filename="main.cpp" />

@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#ifndef RIGIDBODY_h
+#define RIGIDBODY_h
 
 class Rigidbody {
     sf::Vector2f position;
@@ -19,3 +21,4 @@ class Rigidbody {
         void enableGravity();
         bool getGravity();
 };
+#endif // RIGIDBODY_h

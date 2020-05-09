@@ -1,7 +1,11 @@
 #include<SFML/Graphics.hpp>
 #include "PhysicsEngine.h"
 #include "TerrainGenerator.h"
-#include "Player.h"
+#include "Tank.h"
+
+#ifndef GAMEMASTER_h
+#define GAMEMASTER_h
+
 
 class GameMaster {
     unsigned screenWidth, screenHeight;
@@ -12,7 +16,9 @@ class GameMaster {
     PhysicsEngine pe;
 
     int playerCount=5;
-    std::vector<Player> players;
+    std::vector<Tank> tanks;
+
+    int currentPlayerIndex = 0;
 
     public:
         GameMaster(unsigned width, unsigned height);
@@ -21,3 +27,5 @@ class GameMaster {
         void handleEvent();
         void drawTerrain();
 };
+
+#endif // GAMEMASTER_h
