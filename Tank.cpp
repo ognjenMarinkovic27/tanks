@@ -22,3 +22,8 @@ void Tank::travel(float speed) {
 Rigidbody* Tank::getRigidbody() {
     return rb;
 }
+
+void Tank::draw ()
+{
+
+}
