@@ -46,7 +46,7 @@ void GameMaster::run() {
             if(evnt.type == sf::Event::KeyReleased) {
                 if(evnt.key.code == sf::Keyboard::Space)
                 {
-                    tanks[currentPlayerIndex].travel(1);
+                    //tanks[currentPlayerIndex].travel(1);
                     currentPlayerIndex=(currentPlayerIndex+1)%playerCount;
                 }
 
@@ -114,8 +114,22 @@ void GameMaster::run() {
             objectSprite.setFillColor(tanks[i].getColor());
             objectSprite.setPosition(sf::Vector2f(X,Y));
             objectSprite.setRotation(rigidbodies[i]->getRotation()-90);
+            sf::RectangleShape pipeSprite(sf::Vector2f(30, 5));
+            pipeSprite.setOrigin(0,2.5f);
+            pipeSprite.setFillColor(sf::Color(40, 40, 40));
+            pipeSprite.setPosition(sf::Vector2f(X,Y));
+            pipeSprite.setRotation(-tanks[i].getPipeRotation());
+            gameWindow.draw(pipeSprite);
             gameWindow.draw(objectSprite);
             gameWindow.draw(name);
+        }
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+            tanks[currentPlayerIndex].rotatePipe(0.5);
+        }
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+            tanks[currentPlayerIndex].rotatePipe(-0.5);
         }
 
 

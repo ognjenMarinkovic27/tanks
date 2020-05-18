@@ -22,3 +22,11 @@ void Tank::travel(float speed) {
 Rigidbody* Tank::getRigidbody() {
     return rb;
 }
+
+float Tank::getPipeRotation() {
+    return pipeRotation;
+}
+
+void Tank::rotatePipe(float ang) {
+    pipeRotation+=ang;
+}

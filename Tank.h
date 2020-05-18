@@ -5,6 +5,7 @@
 class Tank {
     std::string name;
     sf::Color color;
+    float pipeRotation = 45;
 
     Rigidbody* rb;
     public:
@@ -13,5 +14,7 @@ class Tank {
         std::string getName();
         void travel(float speed);
         Rigidbody* getRigidbody();
+        float getPipeRotation();
+        void rotatePipe(float ang);
 
 };
