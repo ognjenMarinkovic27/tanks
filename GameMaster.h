@@ -2,6 +2,7 @@
 #include "PhysicsEngine.h"
 #include "TerrainGenerator.h"
 #include "Tank.h"
+#include "Weapon.h"
 
 #ifndef GAMEMASTER_h
 #define GAMEMASTER_h
@@ -15,10 +16,15 @@ class GameMaster {
 
     PhysicsEngine pe;
 
+    Weapon currentWeapon;
+    sf::CircleShape currentWeaponSprite;
+
     int playerCount=5;
     std::vector<Tank> tanks;
 
     int currentPlayerIndex = 0;
+
+    bool isShooting = false;
 
     public:
         GameMaster(unsigned width, unsigned height);

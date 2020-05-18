@@ -42,8 +42,16 @@ void Rigidbody::setRotation(float ang) {
     rotation=ang;
 }
 
+void Rigidbody::setTravel(bool t) {
+    canTravel = t;
+}
+
 float Rigidbody::getRotation(){
     return rotation;
+}
+
+bool Rigidbody::getTravel() {
+    return canTravel;
 }
 
 void Rigidbody::disableGravity() {

@@ -1,5 +1,9 @@
 #include <vector>
 
+#ifndef TERRAINGENERATOR_h
+#define TERRAINGENERATOR_h
+
+
 class TerrainGenerator {
     long long seed;
     int width, height;
@@ -19,3 +23,5 @@ class TerrainGenerator {
         int getTileSize();
         void destroyTerrain(int i, int k);
 };
+
+#endif // TERRAINGENERATOR_h

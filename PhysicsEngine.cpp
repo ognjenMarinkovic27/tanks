@@ -31,7 +31,7 @@ void PhysicsEngine::simulate (bool** terrain, std::vector<int> heightMap, unsign
         int X = (int)round(rb->getPosition().x);
         int Y = (int)round(rb->getPosition().y)-7.5;
         if(terrain[X][Y-1] == 0) rb->enableGravity();
-        if(Y<=heightMap[X]) {
+        if(Y<=heightMap[X] && rb->getTravel()) {
                 rb->disableGravity();
                 if(Y<heightMap[X]) {
                     if(rb->getVelocity().x == 0 || Y-heightMap[X]<25)

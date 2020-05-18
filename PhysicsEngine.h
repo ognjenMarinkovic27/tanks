@@ -4,7 +4,7 @@
 class PhysicsEngine {
     std::vector<Rigidbody*> rigidbodies;
 
-    float gravity = 5;
+    float gravity = 2;
     public:
         PhysicsEngine();
         PhysicsEngine(std::vector<Rigidbody*> rigidbodies);

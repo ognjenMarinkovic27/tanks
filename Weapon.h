@@ -12,10 +12,13 @@ class Weapon
     TerrainGenerator tg;
 
     public:
+        Weapon();
         Weapon(std::string name, sf::Color color, Rigidbody* rb, float radius, float damage);
         sf::Color getColor();
         std::string getName();
+        float getRadius();
         Rigidbody* getRigidbody();
+        void setProperties(std::string name, sf::Color color, Rigidbody* rb, float radius, float damage);
         void shoot(float x, float y);
         void destroy();
 };

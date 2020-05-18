@@ -10,8 +10,7 @@ GameMaster::GameMaster(unsigned width, unsigned height) {
     screenHeight = height;
     tg.generateTerrain(width, height, rand()%(1000000-100000)+100000);
 }
-/*bool oneclick = true;
-int k=0;*/
+
 void GameMaster::run() {
     gameWindow.create(sf::VideoMode(screenWidth, screenHeight), "Tanks", sf::Style::Close | sf::Style::Resize);
     std::vector<int> heightMap = tg.getHeightMap();
@@ -47,14 +46,22 @@ void GameMaster::run() {
                 if(evnt.key.code == sf::Keyboard::Space)
                 {
                     //tanks[currentPlayerIndex].travel(1);
+                    currentWeapon.setProperties("cock", sf::Color::Black, new Rigidbody(tanks[currentPlayerIndex].getRigidbody()->getPosition().x, tanks[currentPlayerIndex].getRigidbody()->getPosition().y), 5, 15);
+                    pe.addRigidbody(currentWeapon.getRigidbody());
+                    sf::CircleShape weaponSprite(currentWeapon.getRadius());
+                    weaponSprite.setFillColor(currentWeapon.getColor());
+                    currentWeaponSprite = weaponSprite;
+                    tanks[currentPlayerIndex].getPipeRotation();
+                    currentWeapon.shoot(cos(tanks[currentPlayerIndex].getPipeRotation()*3.14159265359/180)*50, sin(tanks[currentPlayerIndex].getPipeRotation()*3.14159265359/180)*50);
                     currentPlayerIndex=(currentPlayerIndex+1)%playerCount;
+                    isShooting = true;
                 }
 
             }
         }
 
-
-
+        if(currentWeapon.getName()!="undefined")
+            currentWeaponSprite.setPosition(currentWeapon.getRigidbody()->getPosition().x, screenHeight-(currentWeapon.getRigidbody()->getPosition().y+1));
 
         bool** terrain = tg.getTerrain();
         heightMap = tg.getHeightMap();
@@ -132,7 +139,7 @@ void GameMaster::run() {
             tanks[currentPlayerIndex].rotatePipe(-0.5);
         }
 
-
+        //gameWindow.draw(currentWeaponSprite);
 
         /*for(int i=0;i<heightMap.size();i++) {
             sf::RectangleShape square(sf::Vector2f(5,5));
@@ -151,7 +158,9 @@ void GameMaster::run() {
         currentPlayerText.setPosition(screenWidth/2, 20);
 
         gameWindow.draw(currentPlayerText);
+        gameWindow.draw(currentWeaponSprite);
         gameWindow.display();
+        Sleep(10);
     }
 }
 
