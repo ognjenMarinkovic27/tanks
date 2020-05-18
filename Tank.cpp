@@ -29,4 +29,4 @@ float Tank::getPipeRotation() {
 
 void Tank::rotatePipe(float ang) {
     pipeRotation+=ang;
-}
+

@@ -45,16 +45,24 @@
 		<Linker>
 			<Add directory="SFML-2.5.1/lib" />
 		</Linker>
+		<Unit filename="BombWeapon.cpp" />
+		<Unit filename="BombWeapon.h" />
 		<Unit filename="GameMaster.cpp" />
 		<Unit filename="GameMaster.h" />
+		<Unit filename="NormalWeapon.cpp" />
+		<Unit filename="NormalWeapon.h" />
 		<Unit filename="PhysicsEngine.cpp" />
 		<Unit filename="PhysicsEngine.h" />
 		<Unit filename="Rigidbody.cpp" />
 		<Unit filename="Rigidbody.h" />
+		<Unit filename="SniperWeapon.cpp" />
+		<Unit filename="SniperWeapon.h" />
 		<Unit filename="Tank.cpp" />
 		<Unit filename="Tank.h" />
 		<Unit filename="TerrainGenerator.cpp" />
 		<Unit filename="TerrainGenerator.h" />
+		<Unit filename="Weapon.cpp" />
+		<Unit filename="Weapon.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
