@@ -18,7 +18,7 @@ void GameMaster::run() {
     sf::Font font;
     font.loadFromFile("fonts/Poppins-Regular.ttf");
 
-    std::string names[playerCount] = {"Ognjen", "Pajdan", "Vasilije", "Cigan", "Ognjen2"};
+    std::string names[playerCount] = {"Ognjen", "Pajdan", "Pacov", "Cigan", "Krejovic"};
 
 
     for(int i=0;i<playerCount;i++)
