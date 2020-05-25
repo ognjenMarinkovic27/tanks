@@ -13,12 +13,12 @@ class Weapon
 
     public:
         Weapon();
-        Weapon(std::string name, sf::Color color, Rigidbody* rb, float radius, float damage);
+        Weapon(std::string name, sf::Color color, Rigidbody* rb, float radius, float damage, TerrainGenerator tg);
         sf::Color getColor();
         std::string getName();
         float getRadius();
         Rigidbody* getRigidbody();
-        void setProperties(std::string name, sf::Color color, Rigidbody* rb, float radius, float damage);
+        void setProperties(std::string name, sf::Color color, Rigidbody* rb, float radius, float damage, TerrainGenerator tg);
         void shoot(float x, float y);
         void destroy();
 };

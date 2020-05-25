@@ -4,12 +4,14 @@
 #include <math.h>
 #include <Windows.h>
 
-GameMaster::GameMaster(unsigned width, unsigned height) {
+GameMaster::GameMaster(unsigned width, unsigned height, int playerCount, std::string *names) {
     std::ios_base::sync_with_stdio(false);
     srand(time(NULL));
     screenWidth = width;
     screenHeight = height;
     tg.generateTerrain(width, height, rand()%(1000000-100000)+100000);
+    this->playerCount = playerCount;
+    this->names = names;
 }
 
 void GameMaster::run() {
@@ -19,7 +21,6 @@ void GameMaster::run() {
     sf::Font font;
     font.loadFromFile("fonts/Poppins-Regular.ttf");
 
-    std::string names[playerCount] = {"Ognjen", "Pajdan", "Pacov", "Cigan", "Krejovic"};
 
     for(int i=0;i<playerCount;i++)
     {
@@ -46,7 +47,7 @@ void GameMaster::run() {
                 if(evnt.key.code == sf::Keyboard::Space)
                 {
                     //tanks[currentPlayerIndex].travel(1);
-                    currentWeapon.setProperties("cock", sf::Color::Black, new Rigidbody(tanks[currentPlayerIndex].getRigidbody()->getPosition().x, tanks[currentPlayerIndex].getRigidbody()->getPosition().y), 5, 15);
+                    currentWeapon.setProperties("cock", sf::Color::Black, new Rigidbody(tanks[currentPlayerIndex].getRigidbody()->getPosition().x, tanks[currentPlayerIndex].getRigidbody()->getPosition().y+5), 5, 15, tg);
                     pe.addRigidbody(currentWeapon.getRigidbody());
                     sf::CircleShape weaponSprite(currentWeapon.getRadius());
                     weaponSprite.setFillColor(currentWeapon.getColor());
@@ -61,7 +62,15 @@ void GameMaster::run() {
         }
 
         if(currentWeapon.getName()!="undefined")
+        {
             currentWeaponSprite.setPosition(currentWeapon.getRigidbody()->getPosition().x, screenHeight-(currentWeapon.getRigidbody()->getPosition().y+1));
+            if(currentWeapon.getRigidbody()->getPosition().y <= heightMap[(int)currentWeapon.getRigidbody()->getPosition().x]) {
+                currentWeapon.getRigidbody()->setVelocity(0,0);
+                currentWeapon.getRigidbody()->disableGravity();
+                currentWeapon.destroy();
+                currentWeaponSprite.setFillColor(sf::Color::Transparent);
+            }
+        }
 
         bool** terrain = tg.getTerrain();
         heightMap = tg.getHeightMap();

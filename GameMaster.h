@@ -19,6 +19,8 @@ class GameMaster {
     Weapon currentWeapon;
     sf::CircleShape currentWeaponSprite;
 
+    std::string* names;
+
     int playerCount=5;
     std::vector<Tank> tanks;
 
@@ -27,7 +29,7 @@ class GameMaster {
     bool isShooting = false;
 
     public:
-        GameMaster(unsigned width, unsigned height);
+        GameMaster(unsigned width, unsigned height, int playerCount, std::string* names);
         void run();
         void quit();
         void handleEvent();
