@@ -1,4 +1,5 @@
 #include "GameMaster.h"
+#include "Menu.h"
 #include <iostream>
 #include <math.h>
 #include <Windows.h>
@@ -19,7 +20,6 @@ void GameMaster::run() {
     font.loadFromFile("fonts/Poppins-Regular.ttf");
 
     std::string names[playerCount] = {"Ognjen", "Pajdan", "Pacov", "Cigan", "Krejovic"};
-
 
     for(int i=0;i<playerCount;i++)
     {

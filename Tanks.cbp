@@ -49,6 +49,8 @@
 		<Unit filename="BombWeapon.h" />
 		<Unit filename="GameMaster.cpp" />
 		<Unit filename="GameMaster.h" />
+		<Unit filename="Menu.cpp" />
+		<Unit filename="Menu.h" />
 		<Unit filename="NormalWeapon.cpp" />
 		<Unit filename="NormalWeapon.h" />
 		<Unit filename="PhysicsEngine.cpp" />

@@ -1,6 +1,19 @@
 #include <windows.h>
 #include <iostream>
 #include "Menu.h"
+#include "GameMaster.h"
+
+sf::String playerInput1;
+sf::Text playerText1;
+sf::String playerInput2;
+sf::Text playerText2;
+sf::String playerInput3;
+sf::Text playerText3;
+sf::String playerInput4;
+sf::Text playerText4;
+sf::String playerInput5;
+sf::Text playerText5;
+
 
 Menu::Menu(unsigned width, unsigned height) {
     screenWidth = width;
@@ -132,25 +145,94 @@ void Menu::run()
                 window.close();
 
             sf::Font font;
-            sf::String playerInput;
-            sf::Text playerText;
             font.loadFromFile("fonts/Poppins-Regular.ttf");
-            window.clear(sf::Color(0, 153, 255));
+            window.clear(sf::Color(50, 153, 255));
 
-            if (event.type == sf::Event::TextEntered)
+            int mouseX = sf::Mouse::getPosition(window).x;
+            int mouseY = sf::Mouse::getPosition(window).y;
+
+            sf::RectangleShape textbox1(sf::Vector2f(300.f, 50.f));
+            textbox1.setPosition(screenWidth/2-150, screenHeight/3-25);
+            if(pressed==1)
+                textbox1.setFillColor(sf::Color(217, 217, 217));
+            else
+                textbox1.setFillColor(sf::Color(255, 255, 255));
+            textbox1.setOutlineThickness(1.f);
+            textbox1.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(textbox1);
+            playerText1.setFont(font);
+            playerText1.setCharacterSize(30);
+            playerText1.setFillColor(sf::Color(0, 0, 0));
+            playerText1.setOutlineThickness(1.f);
+            playerText1.setOutlineColor(sf::Color(0, 0, 0));
+            playerText1.setPosition(screenWidth/2-140, screenHeight/3-20);
+
+            sf::RectangleShape textbox2(sf::Vector2f(300.f, 50.f));
+            textbox2.setPosition(screenWidth/2-150, screenHeight*2/3-25);
+            if(pressed==2)
+                textbox2.setFillColor(sf::Color(217, 217, 217));
+            else
+                textbox2.setFillColor(sf::Color(255, 255, 255));
+            textbox2.setOutlineThickness(1.f);
+            textbox2.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(textbox2);
+            playerText2.setFont(font);
+            playerText2.setCharacterSize(30);
+            playerText2.setFillColor(sf::Color(0, 0, 0));
+            playerText2.setOutlineThickness(1.f);
+            playerText2.setOutlineColor(sf::Color(0, 0, 0));
+            playerText2.setPosition(screenWidth/2-140, screenHeight*2/3-20);
+
+            sf::RectangleShape play(sf::Vector2f(100.f, 50.f));
+            play.setPosition(screenWidth/2-50, 1);
+            if(mouseX > play.getPosition().x && mouseX < play.getPosition().x + 100 && mouseY > play.getPosition().y && mouseY < play.getPosition().y + 50)
+                play.setFillColor(sf::Color(150, 0, 0));
+            else
+                play.setFillColor(sf::Color(204, 0, 0));
+            play.setOutlineThickness(1.f);
+            play.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(play);
+            sf::Text playy;
+            playy.setString("PLAY");
+            playy.setFont(font);
+            playy.setCharacterSize(30);
+            playy.setFillColor(sf::Color(0, 0, 0));
+            playy.setOutlineThickness(1.f);
+            playy.setOutlineColor(sf::Color(0, 0, 0));
+            playy.setPosition(screenWidth/2-33, 7);
+            window.draw(playy);
+
+            if(event.type == sf::Event::MouseButtonPressed && mouseX > play.getPosition().x && mouseX < play.getPosition().x + 100 && mouseY > play.getPosition().y && mouseY < play.getPosition().y + 50)
             {
-                playerInput +=event.text.unicode;
-                playerText.setString(playerInput);
+                option=1;
+                window.close();
             }
 
-            playerText.setFont(font);
-            playerText.setCharacterSize(80);
-            playerText.setFillColor(sf::Color(204, 0, 0));
-            playerText.setOutlineThickness(1.f);
-            playerText.setOutlineColor(sf::Color(0, 0, 0));
-            playerText.setPosition(30, 100);
-            window.draw(playerText);
+            if(event.type == sf::Event::MouseButtonPressed)
+                pressed=0;
 
+            if(event.type == sf::Event::MouseButtonPressed && mouseX > textbox1.getPosition().x && mouseX < textbox1.getPosition().x + 300 && mouseY > textbox1.getPosition().y && mouseY < textbox1.getPosition().y + 50)
+                pressed=1;
+
+            if(event.type == sf::Event::MouseButtonPressed && mouseX > textbox2.getPosition().x && mouseX < textbox2.getPosition().x + 300 && mouseY > textbox2.getPosition().y && mouseY < textbox2.getPosition().y + 50)
+                pressed=2;
+
+
+            if (event.type == sf::Event::TextEntered && pressed==1)
+            {
+                playerInput1 += (char)event.text.unicode;
+                playerText1.setString(playerInput1);
+            }
+
+            if (event.type == sf::Event::TextEntered && pressed==2)
+            {
+                 playerInput2 += (char)event.text.unicode;
+                 playerText2.setString(playerInput2);
+            }
+
+
+            window.draw(playerText1);
+            window.draw(playerText2);
             window.display();
         }
     }
@@ -168,7 +250,118 @@ void Menu::run()
             font.loadFromFile("fonts/Poppins-Regular.ttf");
             window.clear(sf::Color(0, 253, 255));
 
+            int mouseX = sf::Mouse::getPosition(window).x;
+            int mouseY = sf::Mouse::getPosition(window).y;
+
+            sf::RectangleShape textbox1(sf::Vector2f(300.f, 50.f));
+            textbox1.setPosition(screenWidth/2-150, screenHeight/4-25);
+            if(pressed==1)
+                textbox1.setFillColor(sf::Color(217, 217, 217));
+            else
+                textbox1.setFillColor(sf::Color(255, 255, 255));
+            textbox1.setOutlineThickness(1.f);
+            textbox1.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(textbox1);
+            playerText1.setFont(font);
+            playerText1.setCharacterSize(30);
+            playerText1.setFillColor(sf::Color(0, 0, 0));
+            playerText1.setOutlineThickness(1.f);
+            playerText1.setOutlineColor(sf::Color(0, 0, 0));
+            playerText1.setPosition(screenWidth/2-140, screenHeight/4-20);
+
+            sf::RectangleShape textbox2(sf::Vector2f(300.f, 50.f));
+            textbox2.setPosition(screenWidth/2-150, screenHeight/2-25);
+            if(pressed==2)
+                textbox2.setFillColor(sf::Color(217, 217, 217));
+            else
+                textbox2.setFillColor(sf::Color(255, 255, 255));
+            textbox2.setOutlineThickness(1.f);
+            textbox2.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(textbox2);
+            playerText2.setFont(font);
+            playerText2.setCharacterSize(30);
+            playerText2.setFillColor(sf::Color(0, 0, 0));
+            playerText2.setOutlineThickness(1.f);
+            playerText2.setOutlineColor(sf::Color(0, 0, 0));
+            playerText2.setPosition(screenWidth/2-140, screenHeight*1/2-20);
+
+            sf::RectangleShape textbox3(sf::Vector2f(300.f, 50.f));
+            textbox3.setPosition(screenWidth/2-150, screenHeight*3/4-25);
+            if(pressed==3)
+                textbox3.setFillColor(sf::Color(217, 217, 217));
+            else
+                textbox3.setFillColor(sf::Color(255, 255, 255));
+            textbox3.setOutlineThickness(1.f);
+            textbox3.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(textbox3);
+            playerText3.setFont(font);
+            playerText3.setCharacterSize(30);
+            playerText3.setFillColor(sf::Color(0, 0, 0));
+            playerText3.setOutlineThickness(1.f);
+            playerText3.setOutlineColor(sf::Color(0, 0, 0));
+            playerText3.setPosition(screenWidth/2-140, screenHeight*3/4-20);
+
+            sf::RectangleShape play(sf::Vector2f(100.f, 50.f));
+            play.setPosition(screenWidth/2-50, 1);
+            if(mouseX > play.getPosition().x && mouseX < play.getPosition().x + 100 && mouseY > play.getPosition().y && mouseY < play.getPosition().y + 50)
+                play.setFillColor(sf::Color(150, 0, 0));
+            else
+                play.setFillColor(sf::Color(204, 0, 0));
+            play.setOutlineThickness(1.f);
+            play.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(play);
+            sf::Text playy;
+            playy.setString("PLAY");
+            playy.setFont(font);
+            playy.setCharacterSize(30);
+            playy.setFillColor(sf::Color(0, 0, 0));
+            playy.setOutlineThickness(1.f);
+            playy.setOutlineColor(sf::Color(0, 0, 0));
+            playy.setPosition(screenWidth/2-33, 7);
+            window.draw(playy);
+
+            if(event.type == sf::Event::MouseButtonPressed && mouseX > play.getPosition().x && mouseX < play.getPosition().x + 100 && mouseY > play.getPosition().y && mouseY < play.getPosition().y + 50)
+            {
+                option=2;
+                window.close();
+            }
+
+            if(event.type == sf::Event::MouseButtonPressed)
+                pressed=0;
+
+            if(event.type == sf::Event::MouseButtonPressed && mouseX > textbox1.getPosition().x && mouseX < textbox1.getPosition().x + 300 && mouseY > textbox1.getPosition().y && mouseY < textbox1.getPosition().y + 50)
+                pressed=1;
+
+            if(event.type == sf::Event::MouseButtonPressed && mouseX > textbox2.getPosition().x && mouseX < textbox2.getPosition().x + 300 && mouseY > textbox2.getPosition().y && mouseY < textbox2.getPosition().y + 50)
+                pressed=2;
+
+            if(event.type == sf::Event::MouseButtonPressed && mouseX > textbox3.getPosition().x && mouseX < textbox3.getPosition().x + 300 && mouseY > textbox3.getPosition().y && mouseY < textbox3.getPosition().y + 50)
+                pressed=3;
+
+
+            if (event.type == sf::Event::TextEntered && pressed==1)
+            {
+                playerInput1 += (char)event.text.unicode;
+                playerText1.setString(playerInput1);
+            }
+
+            if (event.type == sf::Event::TextEntered && pressed==2)
+            {
+                 playerInput2 += (char)event.text.unicode;
+                 playerText2.setString(playerInput2);
+            }
+
+            if(event.type == sf::Event::TextEntered && pressed==3)
+            {
+                 playerInput3 += (char)event.text.unicode;
+                 playerText3.setString(playerInput3);
+            }
+
+            window.draw(playerText1);
+            window.draw(playerText2);
+            window.draw(playerText3);
             window.display();
+
         }
     }
 
@@ -184,6 +377,62 @@ void Menu::run()
             sf::Font font;
             font.loadFromFile("fonts/Poppins-Regular.ttf");
             window.clear(sf::Color(0, 0, 255));
+
+            int mouseX = sf::Mouse::getPosition(window).x;
+            int mouseY = sf::Mouse::getPosition(window).y;
+
+            sf::RectangleShape textbox1(sf::Vector2f(300.f, 50.f));
+            textbox1.setPosition(screenWidth/2-150, screenHeight/5-25);
+            textbox1.setFillColor(sf::Color(255, 255, 255));
+            textbox1.setOutlineThickness(1.f);
+            textbox1.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(textbox1);
+
+            sf::RectangleShape textbox2(sf::Vector2f(300.f, 50.f));
+            textbox2.setPosition(screenWidth/2-150, screenHeight*2/5-25);
+            textbox2.setFillColor(sf::Color(255, 255, 255));
+            textbox2.setOutlineThickness(1.f);
+            textbox2.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(textbox2);
+
+            sf::RectangleShape textbox3(sf::Vector2f(300.f, 50.f));
+            textbox3.setPosition(screenWidth/2-150, screenHeight*3/5-25);
+            textbox3.setFillColor(sf::Color(255, 255, 255));
+            textbox3.setOutlineThickness(1.f);
+            textbox3.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(textbox3);
+
+            sf::RectangleShape textbox4(sf::Vector2f(300.f, 50.f));
+            textbox4.setPosition(screenWidth/2-150, screenHeight*4/5-25);
+            textbox4.setFillColor(sf::Color(255, 255, 255));
+            textbox4.setOutlineThickness(1.f);
+            textbox4.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(textbox4);
+
+            sf::RectangleShape play(sf::Vector2f(100.f, 50.f));
+            play.setPosition(screenWidth/2-50, 1);
+            if(mouseX > play.getPosition().x && mouseX < play.getPosition().x + 100 && mouseY > play.getPosition().y && mouseY < play.getPosition().y + 50)
+                play.setFillColor(sf::Color(150, 0, 0));
+            else
+                play.setFillColor(sf::Color(204, 0, 0));
+            play.setOutlineThickness(1.f);
+            play.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(play);
+            sf::Text playy;
+            playy.setString("PLAY");
+            playy.setFont(font);
+            playy.setCharacterSize(30);
+            playy.setFillColor(sf::Color(0, 0, 0));
+            playy.setOutlineThickness(1.f);
+            playy.setOutlineColor(sf::Color(0, 0, 0));
+            playy.setPosition(screenWidth/2-33, 7);
+            window.draw(playy);
+
+            if(event.type == sf::Event::MouseButtonPressed && mouseX > play.getPosition().x && mouseX < play.getPosition().x + 100 && mouseY > play.getPosition().y && mouseY < play.getPosition().y + 50)
+            {
+                option=3;
+                window.close();
+            }
 
             window.display();
         }
@@ -202,7 +451,106 @@ void Menu::run()
             font.loadFromFile("fonts/Poppins-Regular.ttf");
             window.clear(sf::Color(0, 153, 115));
 
+            int mouseX = sf::Mouse::getPosition(window).x;
+            int mouseY = sf::Mouse::getPosition(window).y;
+
+            sf::RectangleShape textbox1(sf::Vector2f(300.f, 50.f));
+            textbox1.setPosition(screenWidth/2-150, screenHeight/6-25);
+            textbox1.setFillColor(sf::Color(255, 255, 255));
+            textbox1.setOutlineThickness(1.f);
+            textbox1.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(textbox1);
+
+            sf::RectangleShape textbox2(sf::Vector2f(300.f, 50.f));
+            textbox2.setPosition(screenWidth/2-150, screenHeight/3-25);
+            textbox2.setFillColor(sf::Color(255, 255, 255));
+            textbox2.setOutlineThickness(1.f);
+            textbox2.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(textbox2);
+
+            sf::RectangleShape textbox3(sf::Vector2f(300.f, 50.f));
+            textbox3.setPosition(screenWidth/2-150, screenHeight/2-25);
+            textbox3.setFillColor(sf::Color(255, 255, 255));
+            textbox3.setOutlineThickness(1.f);
+            textbox3.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(textbox3);
+
+            sf::RectangleShape textbox4(sf::Vector2f(300.f, 50.f));
+            textbox4.setPosition(screenWidth/2-150, screenHeight*2/3-25);
+            textbox4.setFillColor(sf::Color(255, 255, 255));
+            textbox4.setOutlineThickness(1.f);
+            textbox4.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(textbox4);
+
+            sf::RectangleShape textbox5(sf::Vector2f(300.f, 50.f));
+            textbox5.setPosition(screenWidth/2-150, screenHeight*5/6-25);
+            textbox5.setFillColor(sf::Color(255, 255, 255));
+            textbox5.setOutlineThickness(1.f);
+            textbox5.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(textbox5);
+
+            sf::RectangleShape play(sf::Vector2f(100.f, 50.f));
+            play.setPosition(screenWidth/2-50, 1);
+            if(mouseX > play.getPosition().x && mouseX < play.getPosition().x + 100 && mouseY > play.getPosition().y && mouseY < play.getPosition().y + 50)
+                play.setFillColor(sf::Color(150, 0, 0));
+            else
+                play.setFillColor(sf::Color(204, 0, 0));
+            play.setOutlineThickness(1.f);
+            play.setOutlineColor(sf::Color(0, 0, 0));
+            window.draw(play);
+            sf::Text playy;
+            playy.setString("PLAY");
+            playy.setFont(font);
+            playy.setCharacterSize(30);
+            playy.setFillColor(sf::Color(0, 0, 0));
+            playy.setOutlineThickness(1.f);
+            playy.setOutlineColor(sf::Color(0, 0, 0));
+            playy.setPosition(screenWidth/2-33, 7);
+            window.draw(playy);
+
+            if(event.type == sf::Event::MouseButtonPressed && mouseX > play.getPosition().x && mouseX < play.getPosition().x + 100 && mouseY > play.getPosition().y && mouseY < play.getPosition().y + 50)
+            {
+                option=4;
+                window.close();
+            }
+
             window.display();
         }
     }
 }
+
+int Menu::getOption()
+{
+    return option;
+}
+
+int Menu::getNumber()
+{
+    return (option+1);
+}
+
+std::string Menu::getName1()
+{
+    return playerInput1;
+}
+
+std::string Menu::getName2()
+{
+    return playerInput2;
+}
+
+std::string Menu::getName3()
+{
+    return playerInput3;
+}
+
+std::string Menu::getName4()
+{
+    return playerInput4;
+}
+
+std::string Menu::getName5()
+{
+    return playerInput5;
+}
+
